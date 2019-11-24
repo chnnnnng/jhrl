@@ -1,0 +1,43 @@
+<ion-grid>
+  <ion-row id="top-bar">
+    <ion-col size=2 id="top-bar-prev" (click)="goToPrevWeek()">
+      上一周
+    </ion-col>
+    <ion-col size=8 id="top-bar-center">
+      第{{weeknumber}}周
+    </ion-col>
+    <ion-col size=2 id="top-bar-next" (click)="goToNextWeek()">
+      下一周
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-grid>
+  <ion-row style="border-bottom:1px #ccc solid;padding: 2px 0px 2px 0px;">
+    <ion-col>
+        <div class="dayBarItem" style="height: 100%">
+        </div>
+    </ion-col>
+    <ion-col *ngFor="let day of week">
+        <div [class.today]="day.today == 1" class="dayBarItem">
+            <div class="daySelectorItemUpper">{{day.day}}</div>
+            <div class="daySelectorItemDowner">{{day.date}}</div>
+        </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-grid>
+  <ion-row>
+      <ion-col size=1.5 id="time-table-left">
+          <ion-row *ngFor="let time of dayTimeList">
+              <ion-col>
+                {{time}}
+              </ion-col>
+            </ion-row>
+      </ion-col>
+      <ion-col class="time-table-right-cols" size=1.5 *ngFor="let day of schedule;let i = index;" [class.lighterCol]="i % 2 == 0" [class.darkerCol]="i % 2 == 1">
+        <ion-row *ngFor="let course of day" [ngStyle]="course.style" (click)="presentPopover(course)" [class.user_schedule]="course.type == 's'">
+          {{course.name}}{{course.title}}
+        </ion-row>
+      </ion-col>
+  </ion-row>
+</ion-grid>

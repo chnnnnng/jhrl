@@ -1,5 +1,7 @@
 {
   "name": "jhrl",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

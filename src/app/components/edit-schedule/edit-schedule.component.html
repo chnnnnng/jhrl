@@ -1,0 +1,38 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>编辑日程</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()"><ion-icon name="close"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <form>
+      <ion-list>
+        <ion-item>
+            <ion-label position="floating">事件标题</ion-label>
+            <ion-input required [(ngModel)]="schedule.title" name="title"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">事件地点</ion-label>
+            <ion-input [(ngModel)]="schedule.location" name="location"></ion-input>
+        </ion-item>
+        <ion-item-divider></ion-item-divider>
+        <ion-item>
+          <ion-label>开始时间</ion-label>
+          <ion-datetime displayFormat="{{timePicker.format}}" min="{{timePicker.min}}" max="{{timePicker.max}}" [(ngModel)]="timePicker.start" done-text="确定" cancel-text="取消" name="start"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>结束时间</ion-label>
+          <ion-datetime displayFormat="{{timePicker.format}}" min="{{timePicker.min}}" max="{{timePicker.max}}" [(ngModel)]="timePicker.end" done-text="确定" cancel-text="取消" name="end"></ion-datetime>
+        </ion-item>
+        <ion-item-divider></ion-item-divider>
+        <ion-item>
+            <ion-label position="stacked">备注</ion-label>
+            <ion-textarea [(ngModel)]="schedule.note" name="note"></ion-textarea>
+          </ion-item>
+      </ion-list>
+      <ion-button expand="block" type="submit" (click)="onFormSubmit()" color="success">确认编辑<ion-icon name="trash"></ion-icon></ion-button>
+      <ion-button expand="block" (click)="deleteSchedule()" color="danger">删除日程<ion-icon name="trash"></ion-icon></ion-button>
+  </form>
+</ion-content>

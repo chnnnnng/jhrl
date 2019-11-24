@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      精弘日历
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="switchView" mode='md' >
+    <ion-segment-button value="weekly">
+      <ion-label>周视图</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="daily">
+      <ion-label>日视图</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="switchView">
+    <div *ngSwitchCase="'weekly'">
+      <app-week-view [calendarData]='calendarData'></app-week-view>
+    </div>
+    <div *ngSwitchCase="'daily'">
+      <app-day-view [calendarData]='calendarData'></app-day-view>
+    </div>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" edge="false">
+      <ion-fab-button (click)="createSchedule()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+</ion-content>
+
+

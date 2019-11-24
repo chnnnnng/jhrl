@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      待办事项
+    </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="manageGroup()">管理分组</ion-button>
+      <ion-button *ngIf="isReorderDisabled" (click)="toggleReorderGroup()">调整</ion-button>
+      <ion-button *ngIf="!isReorderDisabled" (click)="toggleReorderGroup()">完成</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<ion-card>
+    <ion-list (ionChange)="groupChanged($event)" style="padding:0px;">
+        <ion-item color="light">
+          <ion-label>待办事项组</ion-label>
+          <ion-select value="{{cur_group}}" okText="打开" cancelText="关闭">
+            <ion-select-option *ngFor="let group of groupList;let i = index" value="{{i}}">{{group.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+    </ion-list>
+</ion-card>
+  <ion-reorder-group (ionItemReorder)="reorder($event)" disabled="{{isReorderDisabled}}">
+    <ion-item-sliding *ngFor="let todo of todoList;let i = index"> 
+        <ion-item>
+          <ion-label [class.todoDone]="todo.status" [class.todoDoing]="!todo.status">{{todo.title}}</ion-label>
+          <ion-reorder slot="end"></ion-reorder>
+        </ion-item>
+        <ion-item-options side="start">
+          <ion-item-option color="success" (click)="setDone(i)" *ngIf="!todo.status">标记为已完成</ion-item-option>
+          <ion-item-option color="primary" (click)="setDoing(i)" *ngIf="todo.status">标记为未完成</ion-item-option>
+        </ion-item-options>
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="deleteTodo(i)">删除该事项</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+  </ion-reorder-group>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" edge="false">
+      <ion-fab-button (click)="createTodo()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+  </ion-fab>
+</ion-content>

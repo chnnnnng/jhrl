@@ -1,0 +1,25 @@
+<ion-card *ngIf="course.type=='c'">
+    <ion-card-header>
+      <ion-card-subtitle><b>{{course.location}}</b></ion-card-subtitle>
+      <ion-card-title>「{{course.name}}」</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      讲师&nbsp;:&nbsp;{{course.teacher}}<br>
+      时间&nbsp;:&nbsp;{{course.start_time}}~{{course.end_time}} (第{{course.start_time_in_curriculum}}节～第{{course.end_time_in_curriculum}}节)<br>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="course.type=='s'">
+    <ion-card-header>
+      <ion-card-subtitle *ngIf="course.location != ''"><b>{{course.location}}</b></ion-card-subtitle>
+      <ion-card-title>「{{course.title}}」</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      开始于{{course.start_zh}}<br>
+      结束于{{course.end_zh}}<br>
+      <em *ngIf="course.note != ''"><hr>{{course.note}}</em>
+    </ion-card-content>
+
+    <ion-item><ion-button slot="end" color="secondary" (click)="editSchedule(course)"><ion-icon name="switch"></ion-icon>编辑</ion-button></ion-item>
+  </ion-card>

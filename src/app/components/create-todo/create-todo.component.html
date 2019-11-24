@@ -1,0 +1,25 @@
+<ion-header translucent>
+    <ion-toolbar>
+      <ion-title>创建待办事项</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="dismissModal()"><ion-icon name="close"></ion-icon></ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content fullscreen>
+    <form>
+        <ion-list>
+          <ion-item>
+              <ion-label position="floating">待办事项</ion-label>
+              <ion-input required [(ngModel)]="title" name="title"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label>待办事项组</ion-label>
+              <ion-select value="{{group}}" name="group" okText="打开" cancelText="关闭" (ionChange)="groupChanged($event)">
+                <ion-select-option *ngFor="let group of groupList;let i = index" value="{{i}}">{{group.name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+        </ion-list>
+        <ion-button expand="block" type="submit" (click)="onFormSubmit()">完成<ion-icon name="checkmark"></ion-icon></ion-button>
+    </form>
+  </ion-content>

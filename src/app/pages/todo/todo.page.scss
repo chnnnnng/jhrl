@@ -1,0 +1,10 @@
+$deleteLineColor : #D97E96;
+$deleteTextColor : #9C9EA1;
+.todoDoing{
+    
+}
+.todoDone{
+    text-decoration-line: line-through;
+    text-decoration-color: $deleteLineColor;
+    color:$deleteTextColor;
+}

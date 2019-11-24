@@ -1,0 +1,80 @@
+$heightPerLine : 30px;
+$colorDark:#ff5983;
+$colorLight:#ffc1d0;
+#top-bar{
+    height: 40px;
+    line-height: 40px;
+}
+#top-bar #top-bar-prev{
+    background-color: $colorLight;
+    text-align: start;
+    padding-left: 10px;
+    color: #fffff9;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+#top-bar #top-bar-next{
+    background-color: $colorLight;
+    text-align: end;
+    padding-right: 10px;
+    color: #fffff9;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+#top-bar #top-bar-center{
+    text-align: center;
+    color: #404040;
+}
+.dayBarItem{
+    width: 100%;
+    background-color: #fffff9;
+    color: #404040;
+    padding: 8px 0 10px 0;
+    text-align: center;
+    font-size: 18px;
+}
+.dayBarItem.today{
+    border-radius: 50px;
+    width: 100%;
+    background-color: $colorDark;
+    color: #fffcf7;
+}
+ion-grid,ion-col{
+    padding: 0px;
+}
+#time-table-left ion-col{
+    height: $heightPerLine;
+    border-bottom: 1px #D9D6CF dotted;
+    color: #404040;
+    font-size: 0.6em;
+    line-height: $heightPerLine;
+    text-align: center;
+    background-color: #FDFCF9;
+}
+.time-table-right-cols{
+    position: relative;
+    height: auto;
+}
+.time-table-right-cols.darkerCol{
+    background-color: #FDFCF9;
+}
+.time-table-right-cols.lighterCol{
+    background-color: #fffff9;
+}
+.time-table-right-cols ion-row{
+    width: 100%;
+    position: absolute;
+    background-color: $colorLight;
+    border-top: 3px $colorDark solid;
+    padding:1px 3px;
+    color: #FFFFFF;
+    font-size: 0.8em;
+    line-height: 1.2em;
+    overflow: hidden;
+    opacity: 60%;
+}
+.time-table-right-cols .user_schedule{
+    min-height: 1.8em;
+    background-color: #BCA1CC;
+    border-top: 3px #7D4F9E solid;
+}
