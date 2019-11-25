@@ -1,25 +1,24 @@
 $heightPerLine : 30px;
 $colorDark:#ff5983;
 $colorLight:#ffc1d0;
+$radius : 5px;
 #top-bar{
     height: 40px;
     line-height: 40px;
 }
 #top-bar #top-bar-prev{
     background-color: $colorLight;
-    text-align: start;
-    padding-left: 10px;
+    text-align: center;
     color: #fffff9;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
+    border-top-right-radius: $radius;
+    border-bottom-right-radius: $radius;
 }
 #top-bar #top-bar-next{
     background-color: $colorLight;
-    text-align: end;
-    padding-right: 10px;
+    text-align: center;
     color: #fffff9;
-    border-top-left-radius: 50px;
-    border-bottom-left-radius: 50px;
+    border-top-left-radius: $radius;
+    border-bottom-left-radius: $radius;
 }
 #top-bar #top-bar-center{
     text-align: center;
@@ -29,12 +28,11 @@ $colorLight:#ffc1d0;
     width: 100%;
     background-color: #fffff9;
     color: #404040;
-    padding: 8px 0 10px 0;
+    padding: 8px;
     text-align: center;
     font-size: 18px;
 }
 .dayBarItem.today{
-    border-radius: 50px;
     width: 100%;
     background-color: $colorDark;
     color: #fffcf7;

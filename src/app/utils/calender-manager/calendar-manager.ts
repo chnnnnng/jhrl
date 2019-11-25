@@ -1,33 +1,32 @@
 import { TimeManager } from './../TimeManager/time-manager';
 export class CalendarManager {
     calenderRawData : any;
-    studentInfo : {};
     weekMap = {1:0,2:1,3:2,4:3,5:4,6:5,7:6};
     rawCourseList : any;
     CourseListBasesOnWeek = new Array();
     timeManager : TimeManager = new TimeManager();
 
     constructor(rawCalendar :any){
-        this.calenderRawData = rawCalendar;
-        this.studentInfo = {
-            'xh':rawCalendar.xsxx.XH,
-            'name':rawCalendar.xsxx.XM,
-            'xuenian':rawCalendar.xsxx.XNMC
-        };
-        this.rawCourseList = rawCalendar.kbList;
-        for (let course of this.rawCourseList){
-            var week = course.zcd.split(',');
-            for(let key in week){
-                week[key] = week[key].replace("周","");
-                if(week[key].search("(双)") != -1){
-                    week[key] = week[key].replace("(双)","");
-                    this.putToCourseList(<number>(week[key].split('-')[0]),<number>(week[key].split('-')[1]),2,this.formatCourse(course));
-                }else if(week[key].search("-") != -1){
-                    this.putToCourseList(<number>(week[key].split('-')[0]),<number>(week[key].split('-')[1]),1,this.formatCourse(course));
-                }else{
-                    this.putToCourseList(<number>(week[key]),<number>(week[key]),1,this.formatCourse(course));
+        try{
+            this.calenderRawData = rawCalendar;
+            this.rawCourseList = rawCalendar.kbList;
+            for (let course of this.rawCourseList){
+                var week = course.zcd.split(',');
+                for(let key in week){
+                    week[key] = week[key].replace("周","");
+                    if(week[key].search("(双)") != -1){
+                        week[key] = week[key].replace("(双)","");
+                        this.putToCourseList(<number>(week[key].split('-')[0]),<number>(week[key].split('-')[1]),2,this.formatCourse(course));
+                    }else if(week[key].search("-") != -1){
+                        this.putToCourseList(<number>(week[key].split('-')[0]),<number>(week[key].split('-')[1]),1,this.formatCourse(course));
+                    }else{
+                        this.putToCourseList(<number>(week[key]),<number>(week[key]),1,this.formatCourse(course));
+                    }
                 }
             }
+        }catch(e){
+            alert("原始课表信息配置异常，请检查重试。");
+            window.location.href = "/settings";
         }
     }
 

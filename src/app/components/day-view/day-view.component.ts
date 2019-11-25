@@ -3,7 +3,7 @@ import { TimeManager } from './../../utils/TimeManager/time-manager';
 import { CalendarManager } from './../../utils/calender-manager/calendar-manager';
 import { Component, OnInit, Input } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
-import { DetailPopoverComponent } from '../detail-popover/detail-popover/detail-popover.component';
+import { DetailPopoverComponent } from '../detail-popover/detail-popover.component';
 
 @Component({
   selector: 'app-day-view',

@@ -1,9 +1,7 @@
-import { LocalStorageService } from './../../services/local-storage/local-storage.service';
 import { ScheduleManager } from './../../utils/schedule-manager/schedule-manager';
 import { TimeManager } from 'src/app/utils/TimeManager/time-manager';
 import { ModalController, AlertController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { VirtualTimeScheduler } from 'rxjs';
 
 @Component({
   selector: 'app-create-scedule',

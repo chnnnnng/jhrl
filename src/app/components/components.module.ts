@@ -1,6 +1,6 @@
 import { DayViewComponent } from '../components/day-view/day-view.component';
 import { WeekViewComponent } from '../components/week-view/week-view.component';
-import { DetailPopoverComponent } from './detail-popover/detail-popover/detail-popover.component';
+import { DetailPopoverComponent } from './detail-popover/detail-popover.component';
 import { CreateSceduleComponent } from './create-schedule/create-scedule.component';
 import { EditScheduleComponent } from './edit-schedule/edit-schedule.component';
 import { CreateTodoComponent } from './create-todo/create-todo.component';

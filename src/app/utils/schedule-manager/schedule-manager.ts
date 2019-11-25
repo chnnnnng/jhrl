@@ -1,3 +1,4 @@
+import { SettingManager } from './../setting-manager/setting-manager';
 import { TimeManager } from 'src/app/utils/TimeManager/time-manager';
 import { LocalStorageService } from './../../services/local-storage/local-storage.service';
 export class ScheduleManager {
@@ -9,8 +10,7 @@ export class ScheduleManager {
         if(this.storage.get("schedules") == null){
             this.storage.set("schedules",[]);
         }
-        this.schoolStartDayString = "2019-9-16";
-        //this.schoolStartDayString = this.storage.get("schoolStart");
+        this.schoolStartDayString = new SettingManager().getSchoolStartDate();
     }
 
     public create(schedule ,check = false){

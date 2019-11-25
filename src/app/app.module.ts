@@ -3,7 +3,7 @@ import { CreateTodoComponent } from './components/create-todo/create-todo.compon
 import { EditScheduleComponent } from './components/edit-schedule/edit-schedule.component';
 import { LocalStorageService } from './services/local-storage/local-storage.service';
 import { CreateSceduleComponent } from './components/create-schedule/create-scedule.component';
-import { DetailPopoverComponent } from './components/detail-popover/detail-popover/detail-popover.component';
+import { DetailPopoverComponent } from './components/detail-popover/detail-popover.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';

@@ -1,7 +1,7 @@
+import { SettingManager } from './../../utils/setting-manager/setting-manager';
 import { CreateSceduleComponent } from './../../components/create-schedule/create-scedule.component';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { RawdataServiceService } from 'src/app/services/rawdata-service/rawdata-service.service';
 
 @Component({
   selector: 'app-calendar',
@@ -10,24 +10,26 @@ import { RawdataServiceService } from 'src/app/services/rawdata-service/rawdata-
 })
 export class CalendarPage implements OnInit {
 
-  public switchView : string = "daily";//设定默认视图(daily/weekly/monthly)
+  public switchView : string;;//设定默认视图(daily/weekly/monthly)
   public calendarData : any;
   public coursesData : any;
   private modal : any;
+  private sm = new SettingManager();
 
   constructor(public modalController: ModalController) { 
-    this.coursesData = new RawdataServiceService().getRawCourseData()
-    this.coursesData['schoolStartTime'] = "2019-9-16";
-    this.coursesData['maxWeek'] = "16";
-    this.calendarData = this.coursesData;
   }
 
   ngOnInit() {
-    
-  }
-
-  segmentChanged(ev: any) {
-    console.log('Segment changed', ev.detail.value);
+    try {
+      this.coursesData = this.sm.getRawCourseData();
+      this.coursesData['schoolStartTime'] = this.sm.getSchoolStartDate();
+      this.coursesData['maxWeek'] = this.sm.getSchoolTotalWeeks();
+      this.calendarData = this.coursesData;
+      this.switchView = this.sm.getDefaultView();
+    } catch (error) {
+      alert("数据错误，请检查设置。");
+      window.location.href = "/settings";
+    }
   }
 
   async createSchedule(){

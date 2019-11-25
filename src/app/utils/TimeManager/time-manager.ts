@@ -3,7 +3,7 @@ export class TimeManager {
     
     public static dayTimeList = ['凌晨0点','凌晨1点','凌晨2点','凌晨3点','凌晨4点','凌晨5点','早上6点','早上7点','上午8点','上午9点','上午10点','中午11点','中午12点','下午1点','下午2点','下午3点','下午4点','下午5点','下午6点','傍晚7点','晚上8点','晚上9点','晚上10点','晚上11点'];
     public static dayTimeListSimple = ['0点','1点','2点','3点','4点','5点','6点','7点','8点','9点','10点','11点','12点','13点','14点','15点','16点','17点','18点','19点','20点','21点','22点','23点'];
-    public static timePickerRange = {'max':2020,'min':2019};
+    public static timePickerRange = {'max':(new Date().getFullYear())+1,'min':new Date().getFullYear()};
 
 
     public getTimeBySchedule(schedule : number){

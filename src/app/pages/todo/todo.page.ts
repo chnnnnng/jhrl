@@ -2,7 +2,7 @@ import { ManageGroupComponent } from './../../components/manage-group/manage-gro
 import { CreateTodoComponent } from './../../components/create-todo/create-todo.component';
 import { TodoManager } from './../../utils/todo-manager/todo-manager';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonReorderGroup, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-todo',
@@ -22,10 +22,15 @@ export class TodoPage implements OnInit {
   }
 
   ngOnInit(default_group : number = 0) {
-    this.tm = new TodoManager();
-    this.cur_group = default_group;
-    this.groupList = this.tm.getGroups();
-    this.getTodos();
+    try {
+      this.tm = new TodoManager();
+      this.cur_group = default_group;
+      this.groupList = this.tm.getGroups();
+      this.getTodos();
+    } catch (error) {
+      alert("数据错误，请检查设置。");
+      window.location.href = "/settings";
+    }
   }
 
   getTodos(){

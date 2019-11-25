@@ -2,7 +2,7 @@ import { LocalStorageService } from './../../services/local-storage/local-storag
 import { Todogroup } from './todogroup';
 import { Todo } from './todo';
 export class TodoManager {
-    private rawTodoSample = [{"name":"默认","type":true,"todolist":[{"title":"默认组待办一(样例)","status":false},{"title":"默认组待办二(样例)","status":true},{"title":"默认组待办三(样例)","status":false}]},{"name":"新建分组","type":false,"todolist":[{"title":"新建组待办一(样例)","status":false},{"title":"新建组待办二(样例)","status":true},{"title":"新建组待办三(样例)","status":false}]}];
+    private rawTodoSample = [{"name":"默认","type":true,"todolist":[{"title":"默认·样例待办一","status":false},{"title":"默认·样例待办二","status":true}]}];
     private rawTodo : any;
     private todoGroups = new Array<Todogroup>();
     private storage = new LocalStorageService();
@@ -19,6 +19,10 @@ export class TodoManager {
 
     public getGroups(){
         return this.todoGroups;
+    }
+
+    public getRawGroups(){
+        return this.rawTodo;
     }
 
     public getGroup( i : number){

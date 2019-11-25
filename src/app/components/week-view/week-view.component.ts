@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { TimeManager } from 'src/app/utils/TimeManager/time-manager';
 import { CalendarManager } from 'src/app/utils/calender-manager/calendar-manager';
 import { PopoverController } from '@ionic/angular';
-import { DetailPopoverComponent } from './../detail-popover/detail-popover/detail-popover.component';
+import { DetailPopoverComponent } from '../detail-popover/detail-popover.component';
 
 
 @Component({

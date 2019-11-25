@@ -1,11 +1,13 @@
+ <ion-card>
   <ion-slides [options]="slideOptions">
-      <ion-slide *ngFor="let day of week">
-        <div [class.today]="day.today == 1" [class.selected]="day.selected == 1 " class="daySelectorItem" (click)="onDayClick(day.stamp)">
-            <div>{{day.day}}</div>
-            <div>{{day.date}}</div>
-        </div>
-      </ion-slide>
-  </ion-slides>
+    <ion-slide *ngFor="let day of week">
+      <div [class.today]="day.today == 1" [class.selected]="day.selected == 1 " class="daySelectorItem" (click)="onDayClick(day.stamp)">
+          <div>{{day.day}}</div>
+          <div>{{day.date}}</div>
+      </div>
+    </ion-slide>
+</ion-slides>
+ </ion-card>
   <ion-grid>
     <ion-row>
       <ion-col size=3>

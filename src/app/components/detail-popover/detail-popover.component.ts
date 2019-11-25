@@ -1,4 +1,4 @@
-import { EditScheduleComponent } from './../../edit-schedule/edit-schedule.component';
+import { EditScheduleComponent } from '../edit-schedule/edit-schedule.component';
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 
