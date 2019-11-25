@@ -27,8 +27,8 @@ export class EditScheduleComponent implements OnInit {
 
   ngOnInit() {}
 
-  dismissModal(){
-    this.modalController.dismiss();
+  dismissModal(data = {'action':'no'}){
+    this.modalController.dismiss(data);
   }
 
   async onFormSubmit(ev : any){
@@ -44,9 +44,9 @@ export class EditScheduleComponent implements OnInit {
       //console.log(this.schedule);
       let resl = sm.update(this.schedule);
       if(resl){
-        console.log("成功");
-        this.dismissModal();
-        location.reload();
+        //console.log("成功");
+        this.dismissModal({'action':'edit'});
+        //location.reload();
       }else{
         const alert = await this.alertController.create({
           header: '呃～',
@@ -61,8 +61,8 @@ export class EditScheduleComponent implements OnInit {
   deleteSchedule(ev : any){
     let sm = new ScheduleManager();
     sm.delete(this.schedule);
-    this.dismissModal();
-    location.reload();
+    this.dismissModal({'action':'delete'});
+    //location.reload();
   }
 
   

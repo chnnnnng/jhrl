@@ -51,7 +51,7 @@ export class CreateSceduleComponent implements OnInit {
       if(resl){
         console.log("成功");
         this.dismissModal();
-        location.reload();
+        //location.reload();
       }else{
         const alert = await this.alertController.create({
           header: '呃～',

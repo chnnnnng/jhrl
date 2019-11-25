@@ -1,3 +1,4 @@
+import { EventEmitterService } from './services/event-emitter/event-emitter.service';
 import { ManageGroupComponent } from './components/manage-group/manage-group.component';
 import { CreateTodoComponent } from './components/create-todo/create-todo.component';
 import { EditScheduleComponent } from './components/edit-schedule/edit-schedule.component';
@@ -36,6 +37,7 @@ import { ComponentsModule } from './components/components.module';
     StatusBar,
     SplashScreen,
     LocalStorageService,
+    EventEmitterService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

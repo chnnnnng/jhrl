@@ -1,3 +1,4 @@
+import { EventEmitterService } from './../../services/event-emitter/event-emitter.service';
 import { ScheduleManager } from './../../utils/schedule-manager/schedule-manager';
 import { Component, OnInit, Input } from '@angular/core';
 import { TimeManager } from 'src/app/utils/TimeManager/time-manager';
@@ -25,7 +26,7 @@ export class WeekViewComponent implements OnInit {
   private sm : ScheduleManager;
   private dayTranslation = {0:'周日',1:'周一',2:'周二',3:'周三',4:'周四',5:'周五',6:'周六'}
 
-  constructor(public popoverController: PopoverController) {
+  constructor(public popoverController: PopoverController, public eventEmitterService : EventEmitterService) {
     this.setWeek(0);
   }
 
@@ -35,23 +36,24 @@ export class WeekViewComponent implements OnInit {
   private setWeek(deltaWeek : number){
     var d = new Date();
     var todayDay = d.getDay();
-    console.log("todayDay:"+todayDay);
+    //console.log("todayDay:"+todayDay);
     var todayDate = d.getDate();
     d.setDate( todayDate - (todayDay==0?7:todayDay) + 1 + deltaWeek*7);//当前星期（位移后）的第一天(星期一)的日期
     for(var i=0;i<7;i++){
       this.week[i] = {'date':d.getDate(),'day':this.dayTranslation[d.getDay()],'today':(d.getDate() == todayDate && d.getDay() == todayDay ? 1 : 0),'stamp':d.toString()}
       d.setDate(d.getDate() + 1);
     }
-    console.log(this.week);
+    //console.log(this.week);
   }
 
   refreshWeek(){
       this.schedule = this.cm.getCourseListByWeek(this.weeknumber);
+      //console.log(this.schedule);
       for(let i in this.schedule){
         let user_schedule = this.sm.fetch(this.weeknumber, Number(i)+1);
         if(user_schedule != null) this.schedule[i] = this.schedule[i].concat(user_schedule);
       }
-      console.log(this.schedule);
+      //console.log(this.schedule);
   }
 
   goToPrevWeek(){
@@ -87,6 +89,21 @@ export class WeekViewComponent implements OnInit {
     var startDayDate = TimeManager.generateStartDayDateByString(this.schoolStartDate);
     this.weeknumber = TimeManager.getWeeknumber(nowDate,startDayDate);
     this.nowweeknumber = this.weeknumber;
+    this.refreshWeek();
+
+    this.eventEmitterService.emitter.addListener("askChildRefresh",(v)=>{
+      //console.log("refreshing");
+      this.refresh();
+    });
+    this.eventEmitterService.emitter.addListener("askChildClosePopup",(v)=>{
+      //console.log("close popup");
+      this.popoverController.dismiss();
+    });
+  }
+
+  private refresh(){
+    this.cm = new CalendarManager(this.calendarData);
+    this.sm = new ScheduleManager();
     this.refreshWeek();
   }
 

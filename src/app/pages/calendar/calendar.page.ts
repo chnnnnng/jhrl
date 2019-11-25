@@ -1,3 +1,4 @@
+import { EventEmitterService } from './../../services/event-emitter/event-emitter.service';
 import { SettingManager } from './../../utils/setting-manager/setting-manager';
 import { CreateSceduleComponent } from './../../components/create-schedule/create-scedule.component';
 import { Component, OnInit } from '@angular/core';
@@ -16,7 +17,7 @@ export class CalendarPage implements OnInit {
   private modal : any;
   private sm = new SettingManager();
 
-  constructor(public modalController: ModalController) { 
+  constructor(public modalController: ModalController, public eventEmitterService : EventEmitterService) { 
   }
 
   ngOnInit() {
@@ -34,7 +35,11 @@ export class CalendarPage implements OnInit {
 
   async createSchedule(){
     this.modal = await this.modalController.create({
-      component: CreateSceduleComponent
+      component: CreateSceduleComponent,
+    });
+    this.modal.onDidDismiss()
+    .then((data) => {
+      this.eventEmitterService.emitter.emit("askChildRefresh");
     });
     return await this.modal.present();
   }

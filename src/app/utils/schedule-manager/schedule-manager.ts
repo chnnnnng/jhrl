@@ -1,20 +1,19 @@
-import { SettingManager } from './../setting-manager/setting-manager';
 import { TimeManager } from 'src/app/utils/TimeManager/time-manager';
 import { LocalStorageService } from './../../services/local-storage/local-storage.service';
 export class ScheduleManager {
 
-    private schoolStartDayString : string;
+    //private schoolStartDayString : string;
     private storage = new LocalStorageService();
 
     constructor(){
         if(this.storage.get("schedules") == null){
             this.storage.set("schedules",[]);
         }
-        this.schoolStartDayString = new SettingManager().getSchoolStartDate();
     }
 
     public create(schedule ,check = false){
-        let startDayDate = new Date(this.schoolStartDayString);
+        let schoolStartDateString = this.storage.get("settings").schoolStartDate;
+        let startDayDate = new Date(schoolStartDateString);
         let startDate = new Date(schedule.start);
         let endDate = new Date(schedule.end);
         if(startDate.getDay() == endDate.getDay() && startDate.getTime() < endDate.getTime()){

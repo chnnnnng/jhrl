@@ -1,3 +1,4 @@
+import { EventEmitterService } from './../../services/event-emitter/event-emitter.service';
 import { EditScheduleComponent } from '../edit-schedule/edit-schedule.component';
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
@@ -11,7 +12,7 @@ export class DetailPopoverComponent implements OnInit {
 
   public course : any;
 
-  constructor(public navParams: NavParams,public modalController: ModalController) {
+  constructor(public navParams: NavParams,public modalController: ModalController, public eventEmitterService : EventEmitterService) {
     if(navParams.get('type') == 'c'){
       this.course = {
         'name':navParams.get('name'),
@@ -51,6 +52,18 @@ export class DetailPopoverComponent implements OnInit {
     let modal = await this.modalController.create({
       component: EditScheduleComponent,
       componentProps: {'schedule':course}
+    });
+    modal.onDidDismiss()
+    .then((data) => {
+      //console.log("edit page dismissed"+data.data.action);
+      if(data.data.action == 'no'){
+
+      }else if(data.data.action == 'edit'){
+        this.eventEmitterService.emitter.emit("askChildRefresh");
+      }else if(data.data.action == 'delete'){
+        this.eventEmitterService.emitter.emit("askChildRefresh");
+        this.eventEmitterService.emitter.emit("askChildClosePopup");
+      }
     });
     return await modal.present();
   }

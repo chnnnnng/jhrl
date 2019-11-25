@@ -1,3 +1,4 @@
+import { EventEmitterService } from './../../services/event-emitter/event-emitter.service';
 import { ScheduleManager } from './../../utils/schedule-manager/schedule-manager';
 import { TimeManager } from './../../utils/TimeManager/time-manager';
 import { CalendarManager } from './../../utils/calender-manager/calendar-manager';
@@ -22,8 +23,9 @@ export class DayViewComponent implements OnInit {
   private cm : CalendarManager;
   private sm : ScheduleManager;
   private dayTranslation = {0:'周日',1:'周一',2:'周二',3:'周三',4:'周四',5:'周五',6:'周六'}
+  private cur_selete_date : string;
 
-  constructor(public popoverController: PopoverController) { 
+  constructor(public popoverController: PopoverController, public eventEmitterService : EventEmitterService) { 
     this.slideOptions = {
       'slidesPerView': '7'
     };
@@ -40,6 +42,7 @@ export class DayViewComponent implements OnInit {
   }
 
   onDayClick(date) {
+    this.cur_selete_date = date;
     var clickedDate = new Date(date);
     var startDayDate = new Date();
     startDayDate.setFullYear(<number><unknown>this.schoolStartDate.split('-')[0],<number><unknown>this.schoolStartDate.split('-')[1]-1,<number><unknown>this.schoolStartDate.split('-')[2]);
@@ -47,10 +50,13 @@ export class DayViewComponent implements OnInit {
     var deltaDay = Math.round((clickedDate.getTime()-startDayDate.getTime())/(1000*60*60*24));
     //console.log("相差"+deltaDay+"天第"+(Math.floor(deltaDay/7)-1+2)+"周星期"+clickedDate.getDay());
     this.schedule = this.cm.getCourseListByWeekAndDay((Math.ceil(deltaDay/7)),clickedDate.getDay());
-    let user_schedule = this.sm.fetch((Math.ceil(deltaDay/7)), clickedDate.getDay());
+    let user_schedule = this.sm.fetch((Math.floor(deltaDay/7))+1, clickedDate.getDay());
     if(user_schedule != null) this.schedule = this.schedule.concat(user_schedule);
-    //console.log(this.sm.fetch((Math.ceil(deltaDay/7)), clickedDate.getDay()));
+    //console.log(this.sm.fetch((Math.floor(deltaDay/7))+1, clickedDate.getDay()));
     //console.log(this.schedule);
+    //console.log(deltaDay); 
+    //console.log((Math.ceil(deltaDay/7)),clickedDate.getDay());
+    //console.log(this.sm.fetch(11,1));
     for(var i=0;i<28;i++){
       this.week[i].selected = 0;
       if(this.week[i]['day']== this.dayTranslation[clickedDate.getDay()]&& this.week[i]['date']==clickedDate.getDate()){
@@ -68,15 +74,25 @@ export class DayViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    //console.log(this.calendarData);
-    if(this.calendarData == undefined){
-      console.log("未查询到相关内容");
-    }else{
       this.cm = new CalendarManager(this.calendarData);
       this.sm = new ScheduleManager();
       this.schoolStartDate = this.calendarData.schoolStartTime;
-      this.onDayClick(new Date().toString());
-    }
+      this.cur_selete_date = new Date().toString()
+      this.onDayClick(this.cur_selete_date);
+      this.eventEmitterService.emitter.addListener("askChildRefresh",(v)=>{
+        //console.log("refreshing");
+        this.refresh();
+      });
+      this.eventEmitterService.emitter.addListener("askChildClosePopup",(v)=>{
+        //console.log("close popup");
+        this.popoverController.dismiss();
+      });
+  }
+
+  private refresh(){
+    this.sm = new ScheduleManager();
+    this.cur_selete_date = new Date().toString();
+    this.onDayClick(this.cur_selete_date);
   }
 
 }
