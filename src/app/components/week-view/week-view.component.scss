@@ -30,7 +30,8 @@ $radius : 5px;
     color: #404040;
     padding: 8px 0 10px 0;
     text-align: center;
-    font-size: 18px;
+    opacity: 0.85;
+    font-size: 0.9em;
 }
 .dayBarItem.today{
     width: 100%;
@@ -69,10 +70,23 @@ ion-grid,ion-col{
     font-size: 0.8em;
     line-height: 1.2em;
     overflow: hidden;
-    opacity: 60%;
+    //opacity: 60%;
+    z-index: 500;
 }
 .time-table-right-cols .user_schedule{
     min-height: 1.8em;
     background-color: #BCA1CC;
     border-top: 3px #7D4F9E solid;
+    opacity: 0.7;
+    z-index: 501;
+}
+
+.time-table-right-cols .nowPointer{
+    height: 0;
+    background-color: transparent;
+    border:0;
+    border-top: 2px solid #ccc;
+    padding: 0;
+    opacity: 0.3;
+    z-index: 502;
 }

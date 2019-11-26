@@ -87,7 +87,7 @@ export class SettingsPage implements OnInit {
   }
 
   aboutMe(){
-    window.location.href = "http://chng.fun/about/"
+    window.location.href = "http://chng.fun/jhrl-about/"
   }
 
 }

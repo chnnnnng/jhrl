@@ -19,6 +19,7 @@ export class WeekViewComponent implements OnInit {
   public nowweeknumber : number;
   public weeknumber : number;
   public maxWeek : number;
+  public nowStyle : any;
   public dayTimeList = TimeManager.dayTimeListSimple;
   public schoolStartDate : string;
   public schedule = [];
@@ -90,7 +91,7 @@ export class WeekViewComponent implements OnInit {
     this.weeknumber = TimeManager.getWeeknumber(nowDate,startDayDate);
     this.nowweeknumber = this.weeknumber;
     this.refreshWeek();
-
+    this.refreshNowPointer();
     this.eventEmitterService.emitter.addListener("askChildRefresh",(v)=>{
       //console.log("refreshing");
       this.refresh();
@@ -105,6 +106,11 @@ export class WeekViewComponent implements OnInit {
     this.cm = new CalendarManager(this.calendarData);
     this.sm = new ScheduleManager();
     this.refreshWeek();
+    this.refreshNowPointer();
+  }
+
+  private refreshNowPointer(){
+    this.nowStyle = {'top':TimeManager.getDeltaMinutesFromZeroToNow()/2+'px'};
   }
 
 }

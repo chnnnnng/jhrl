@@ -49,7 +49,7 @@ export class CreateSceduleComponent implements OnInit {
       let sm = new ScheduleManager();
       let resl = sm.create(this.schedule);
       if(resl){
-        console.log("成功");
+        //console.log("成功");
         this.dismissModal();
         //location.reload();
       }else{

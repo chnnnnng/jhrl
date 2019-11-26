@@ -16,7 +16,7 @@
 
 <ion-content>
 
-<ion-card>
+<ion-card> 
     <ion-list (ionChange)="groupChanged($event)" style="padding:0px;">
         <ion-item color="light">
           <ion-label>待办事项组</ion-label>
@@ -41,7 +41,7 @@
         </ion-item-options>
       </ion-item-sliding>
   </ion-reorder-group>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" edge="false">
+  <ion-fab vertical="bottom" horizontal="end" edge="false" slot="fixed" style="margin:0px 30px 30px 0px;">
       <ion-fab-button (click)="createTodo()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>

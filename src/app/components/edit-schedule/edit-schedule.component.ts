@@ -18,8 +18,6 @@ export class EditScheduleComponent implements OnInit {
     this.timePicker = {
       'max':TimeManager.timePickerRange.max,
       'min':TimeManager.timePickerRange.min,
-      'start':this.schedule.start,
-      'end':this.schedule.end,
       'format':'YYYY-MM-DD HH:mm'
     };
     //console.log(this.schedule);

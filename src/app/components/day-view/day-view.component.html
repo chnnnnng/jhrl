@@ -21,16 +21,13 @@
       </ion-col>
       <ion-col size=9>
         <ion-grid id="time-table-right">
-          <ion-row [ngStyle]="nowStyle" id="nowPointer"></ion-row>
+          <ion-row [ngStyle]="nowStyle" class="nowPointer"></ion-row>
           <ion-row *ngFor="let course of schedule" [ngStyle]="course.style" (click)="presentPopover(course)" [class.user_schedule]="course.type == 's'">
             <!--课表-->
-            <ion-col size='3' class="schedule-col-time" *ngIf="course.type=='c'">
+            <ion-col size='4' class="schedule-col-time" *ngIf="course.type=='c'">
               {{course.start_time}}-{{course.end_time}}
             </ion-col>
-            <ion-col size='3'*ngIf="course.type=='c'" >
-              {{course.teacher}}
-            </ion-col>
-            <ion-col size='3' *ngIf="course.type=='c'">
+            <ion-col size='5' *ngIf="course.type=='c'">
               {{course.name}}
             </ion-col>
             <ion-col size='3' class="schedule-col-location" *ngIf="course.type=='c'">

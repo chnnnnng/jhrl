@@ -2,7 +2,7 @@ import { EventEmitterService } from './../../services/event-emitter/event-emitte
 import { SettingManager } from './../../utils/setting-manager/setting-manager';
 import { CreateSceduleComponent } from './../../components/create-schedule/create-scedule.component';
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-calendar',
@@ -17,7 +17,7 @@ export class CalendarPage implements OnInit {
   private modal : any;
   private sm = new SettingManager();
 
-  constructor(public modalController: ModalController, public eventEmitterService : EventEmitterService) { 
+  constructor(public modalController: ModalController, public eventEmitterService : EventEmitterService, public platform : Platform) { 
   }
 
   ngOnInit() {
@@ -27,6 +27,11 @@ export class CalendarPage implements OnInit {
       this.coursesData['maxWeek'] = this.sm.getSchoolTotalWeeks();
       this.calendarData = this.coursesData;
       this.switchView = this.sm.getDefaultView();
+
+      this.platform.resume.subscribe(async () => {
+        this.eventEmitterService.emitter.emit("askChildRefresh");//从后台切回，通知日历刷新。
+      });
+
     } catch (error) {
       alert("数据错误，请检查设置。");
       window.location.href = "/settings";
@@ -39,9 +44,14 @@ export class CalendarPage implements OnInit {
     });
     this.modal.onDidDismiss()
     .then((data) => {
-      this.eventEmitterService.emitter.emit("askChildRefresh");
+      this.eventEmitterService.emitter.emit("askChildRefresh");//模态框关闭，通知刷新。
     });
     return await this.modal.present();
   }
+
+  ionViewDidEnter(){
+    this.eventEmitterService.emitter.emit("askChildRefresh");//从别的页面跳转，通知刷新。
+  }
+  
 
 }

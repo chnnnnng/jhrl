@@ -19,7 +19,7 @@ export class DayViewComponent implements OnInit {
   public slideOptions : any;
   public schoolStartDate : string;
   public schedule = [];
-  public nowStyle = {'top':TimeManager.getDeltaMinutesFromZeroToNow()/2+'px'};
+  public nowStyle : any;
   private cm : CalendarManager;
   private sm : ScheduleManager;
   private dayTranslation = {0:'周日',1:'周一',2:'周二',3:'周三',4:'周四',5:'周五',6:'周六'}
@@ -79,6 +79,7 @@ export class DayViewComponent implements OnInit {
       this.schoolStartDate = this.calendarData.schoolStartTime;
       this.cur_selete_date = new Date().toString()
       this.onDayClick(this.cur_selete_date);
+      this.refreshNowPointer();
       this.eventEmitterService.emitter.addListener("askChildRefresh",(v)=>{
         //console.log("refreshing");
         this.refresh();
@@ -93,6 +94,10 @@ export class DayViewComponent implements OnInit {
     this.sm = new ScheduleManager();
     this.cur_selete_date = new Date().toString();
     this.onDayClick(this.cur_selete_date);
+    this.refreshNowPointer();
   }
 
+  private refreshNowPointer(){
+    this.nowStyle = {'top':TimeManager.getDeltaMinutesFromZeroToNow()/2+'px'};
+  }
 }
