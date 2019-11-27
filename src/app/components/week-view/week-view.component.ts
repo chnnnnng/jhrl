@@ -26,7 +26,8 @@ export class WeekViewComponent implements OnInit {
   private cm : CalendarManager;
   private sm : ScheduleManager;
   private dayTranslation = {0:'周日',1:'周一',2:'周二',3:'周三',4:'周四',5:'周五',6:'周六'}
-
+  private lastRefreshNowPointerTime = 0;
+  
   constructor(public popoverController: PopoverController, public eventEmitterService : EventEmitterService) {
     this.setWeek(0);
   }
@@ -100,6 +101,11 @@ export class WeekViewComponent implements OnInit {
       //console.log("close popup");
       this.popoverController.dismiss();
     });
+    this.eventEmitterService.emitter.addListener("askChildRefreshNowPointer",(v)=>{
+      let thisTime = new Date().getTime();
+      if(thisTime - this.lastRefreshNowPointerTime >200) this.refreshNowPointer();
+      this.lastRefreshNowPointerTime = thisTime;
+    });
   }
 
   private refresh(){
@@ -110,7 +116,9 @@ export class WeekViewComponent implements OnInit {
   }
 
   private refreshNowPointer(){
-    this.nowStyle = {'top':TimeManager.getDeltaMinutesFromZeroToNow()/2+'px'};
+    let d = new Date();
+    //alert("现在时间："+d.getHours()+":"+d.getMinutes()+"px:"+TimeManager.getDeltaMinutesFromZeroToNow(d)/2);
+    this.nowStyle = {'top':TimeManager.getDeltaMinutesFromZeroToNow(d)/2+'px'};
   }
 
 }

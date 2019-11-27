@@ -1,8 +1,9 @@
+import { MoveTodoComponent } from './../../components/move-todo/move-todo.component';
 import { ManageGroupComponent } from './../../components/manage-group/manage-group.component';
 import { CreateTodoComponent } from './../../components/create-todo/create-todo.component';
 import { TodoManager } from './../../utils/todo-manager/todo-manager';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-todo',
@@ -17,7 +18,7 @@ export class TodoPage implements OnInit {
   private groupList : any;
   private cur_group : number;
 
-  constructor(public modalController : ModalController) { 
+  constructor(public modalController : ModalController, public popoverController : PopoverController) { 
     
   }
 
@@ -85,6 +86,18 @@ export class TodoPage implements OnInit {
   deleteTodo(i : number){
     this.todoList.splice(i,1);
     this.save();
+  }
+
+  async  moveTo(i : number){
+    const popover = await this.popoverController.create({
+      component: MoveTodoComponent,
+      componentProps:{'fromgroup':this.cur_group,'i':i}
+    });
+    popover.onDidDismiss().then((data)=>{
+      this.tm = new TodoManager();
+      this.getTodos();
+    })
+    return await popover.present();
   }
 
   async createTodo(){

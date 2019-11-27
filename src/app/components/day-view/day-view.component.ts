@@ -24,6 +24,7 @@ export class DayViewComponent implements OnInit {
   private sm : ScheduleManager;
   private dayTranslation = {0:'周日',1:'周一',2:'周二',3:'周三',4:'周四',5:'周五',6:'周六'}
   private cur_selete_date : string;
+  private lastRefreshNowPointerTime = 0;
 
   constructor(public popoverController: PopoverController, public eventEmitterService : EventEmitterService) { 
     this.slideOptions = {
@@ -82,22 +83,30 @@ export class DayViewComponent implements OnInit {
       this.refreshNowPointer();
       this.eventEmitterService.emitter.addListener("askChildRefresh",(v)=>{
         //console.log("refreshing");
+        //alert("refreshing");
         this.refresh();
       });
       this.eventEmitterService.emitter.addListener("askChildClosePopup",(v)=>{
         //console.log("close popup");
         this.popoverController.dismiss();
       });
+      this.eventEmitterService.emitter.addListener("askChildRefreshNowPointer",(v)=>{
+        let thisTime = new Date().getTime();
+        if(thisTime - this.lastRefreshNowPointerTime >200) this.refreshNowPointer();
+        this.lastRefreshNowPointerTime = thisTime;
+      });
+      
   }
 
   private refresh(){
     this.sm = new ScheduleManager();
-    this.cur_selete_date = new Date().toString();
     this.onDayClick(this.cur_selete_date);
     this.refreshNowPointer();
   }
 
   private refreshNowPointer(){
-    this.nowStyle = {'top':TimeManager.getDeltaMinutesFromZeroToNow()/2+'px'};
+    let d = new Date();
+    //alert("现在时间："+d.getHours()+":"+d.getMinutes()+"px:"+TimeManager.getDeltaMinutesFromZeroToNow(d)/2);
+    this.nowStyle = {'top':TimeManager.getDeltaMinutesFromZeroToNow(d)/2+'px'};
   }
 }

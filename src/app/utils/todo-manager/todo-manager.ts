@@ -58,6 +58,12 @@ export class TodoManager {
         this.refreshRaw();
     }
 
+    public moveTodo(fromGroup : number, index : number, toGroup : number){
+        this.todoGroups[toGroup].todolist.push(this.todoGroups[fromGroup].todolist[index]);
+        this.todoGroups[fromGroup].todolist.splice(index,1);
+        this.refreshRaw();
+    }
+
     private refreshRaw(){
         let newRaw = new Array();
         for(let group of this.todoGroups){

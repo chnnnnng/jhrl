@@ -70,7 +70,7 @@ export class CalendarManager {
      * day为星期几，星期几就是几
      * **/
     public getCourseListByWeekAndDay(week:number,day:number){
-        return this.CourseListBasesOnWeek[week][this.weekMap[day]];
+        return this.CourseListBasesOnWeek[week][this.weekMap[day]] == null ? new Array() : this.CourseListBasesOnWeek[week][this.weekMap[day]];
     }
 
      /**
@@ -78,6 +78,11 @@ export class CalendarManager {
      * 返回值中的index，0表示星期一，1表示星期二，以此类推。
      * **/
     public getCourseListByWeek(week:number){
+        for(let i = 0;i<7;i++){
+            if(this.CourseListBasesOnWeek[week][i] == null){
+                this.CourseListBasesOnWeek[week][i] = new Array();
+            }
+        }
         return this.CourseListBasesOnWeek[week];
     }
 }

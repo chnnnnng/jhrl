@@ -1,3 +1,4 @@
+import { MoveTodoComponent } from './components/move-todo/move-todo.component';
 import { EventEmitterService } from './services/event-emitter/event-emitter.service';
 import { ManageGroupComponent } from './components/manage-group/manage-group.component';
 import { CreateTodoComponent } from './components/create-todo/create-todo.component';
@@ -25,7 +26,8 @@ import { ComponentsModule } from './components/components.module';
      CreateSceduleComponent,
       EditScheduleComponent,
        CreateTodoComponent,
-       ManageGroupComponent
+       ManageGroupComponent,
+       MoveTodoComponent
       ],
   imports: [
     BrowserModule,

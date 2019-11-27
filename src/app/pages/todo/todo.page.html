@@ -37,6 +37,7 @@
           <ion-item-option color="primary" (click)="setDoing(i)" *ngIf="todo.status">标记为未完成</ion-item-option>
         </ion-item-options>
         <ion-item-options side="end">
+          <ion-item-option color="secondary" (click)="moveTo(i)">移动到分组</ion-item-option>
           <ion-item-option color="danger" (click)="deleteTodo(i)">删除该事项</ion-item-option>
         </ion-item-options>
       </ion-item-sliding>

@@ -1,0 +1,10 @@
+<ion-list style="padding-bottom: 0px;">
+    <ion-list-header>移动待办事项</ion-list-header>
+    <ion-item>
+        <ion-label>移动到:</ion-label>
+        <ion-select interface="action-sheet" [(ngModel)]="toGroup" name="selector" cancelText="取消">
+          <ion-select-option *ngFor="let group of groupList;let i = index" value="{{map[i]}}">{{group.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-button expand="full" style="margin:0px" (click)="move()">移动</ion-button>
+</ion-list>  

@@ -29,7 +29,8 @@ export class CalendarPage implements OnInit {
       this.switchView = this.sm.getDefaultView();
 
       this.platform.resume.subscribe(async () => {
-        this.eventEmitterService.emitter.emit("askChildRefresh");//从后台切回，通知日历刷新。
+        //alert("calendar resume, ask refresh");
+        this.eventEmitterService.emitter.emit("askChildRefreshNowPointer");//从后台切回，通知日历刷新。
       });
 
     } catch (error) {
@@ -48,10 +49,5 @@ export class CalendarPage implements OnInit {
     });
     return await this.modal.present();
   }
-
-  ionViewDidEnter(){
-    this.eventEmitterService.emitter.emit("askChildRefresh");//从别的页面跳转，通知刷新。
-  }
-  
 
 }

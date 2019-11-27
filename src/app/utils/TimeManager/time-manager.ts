@@ -23,8 +23,7 @@ export class TimeManager {
         return (toDate.getTime() - fromDate.getTime()) / 60000;
     }
 
-    public static getDeltaMinutesFromZeroToNow(){
-        let d = new Date();
+    public static getDeltaMinutesFromZeroToNow(d = new Date()){
         return d.getHours()*60+d.getMinutes();
     }
 

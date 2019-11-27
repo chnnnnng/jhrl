@@ -1,3 +1,4 @@
+import { MoveTodoComponent } from './move-todo/move-todo.component';
 import { DayViewComponent } from '../components/day-view/day-view.component';
 import { WeekViewComponent } from '../components/week-view/week-view.component';
 import { DetailPopoverComponent } from './detail-popover/detail-popover.component';
@@ -18,7 +19,8 @@ const coms : any[] = [
   CreateSceduleComponent,
   EditScheduleComponent,
   CreateTodoComponent,
-  ManageGroupComponent
+  ManageGroupComponent,
+  MoveTodoComponent
 ];
 
 @NgModule({
