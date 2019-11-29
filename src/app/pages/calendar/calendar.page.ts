@@ -1,3 +1,4 @@
+import { LoginComponent } from './../../components/login/login.component';
 import { EventEmitterService } from './../../services/event-emitter/event-emitter.service';
 import { SettingManager } from './../../utils/setting-manager/setting-manager';
 import { CreateSceduleComponent } from './../../components/create-schedule/create-scedule.component';

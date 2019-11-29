@@ -1,6 +1,8 @@
+import { ModalController } from '@ionic/angular';
 import { SettingManager } from './../../utils/setting-manager/setting-manager';
 import { Settings } from './../../utils/setting-manager/settings';
 import { Component, OnInit } from '@angular/core';
+import { LoginComponent } from 'src/app/components/login/login.component';
 
 @Component({
   selector: 'app-settings',
@@ -9,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsPage implements OnInit {
 
-  public isAutoSettingEnabled = false;//是否开放自动设置模式，现阶段为不开放
+  public isAutoSettingEnabled = true;//是否开放自动设置模式，现阶段为不开放(20191129已开放)
   //public isAutoSetting : boolean;
   public setting : Settings;
   public backupData : string;
@@ -20,7 +22,7 @@ export class SettingsPage implements OnInit {
   private iseditSchoolTotalWeeks = false;
   private isRecover = false;
 
-  constructor() { }
+  constructor(private modalController : ModalController) { }
 
   ngOnInit() {
     this.setting = this.sm.setting;
@@ -88,6 +90,19 @@ export class SettingsPage implements OnInit {
 
   aboutMe(){
     window.location.href = "http://chng.fun/jhrl-about/"
+  }
+
+  async autoFetchKb(){
+    let modal = await this.modalController.create({
+      component: LoginComponent,
+    });
+    modal.onDidDismiss()
+    .then((data) => {
+      this.setting.rawCourseData = JSON.stringify(data.data['kb']);
+      this.save();
+      //location.reload();
+    });
+    return await modal.present();
   }
 
 }

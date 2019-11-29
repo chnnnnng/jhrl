@@ -1,3 +1,5 @@
+import { ApiServiceService } from './services/api-service/api-service.service';
+import { LoginComponent } from './components/login/login.component';
 import { MoveTodoComponent } from './components/move-todo/move-todo.component';
 import { EventEmitterService } from './services/event-emitter/event-emitter.service';
 import { ManageGroupComponent } from './components/manage-group/manage-group.component';
@@ -18,6 +20,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ComponentsModule } from './components/components.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,12 +30,14 @@ import { ComponentsModule } from './components/components.module';
       EditScheduleComponent,
        CreateTodoComponent,
        ManageGroupComponent,
-       MoveTodoComponent
+       MoveTodoComponent,
+       LoginComponent
       ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ComponentsModule,
+    HttpClientModule,
     IonicModule.forRoot()
   ],
   providers: [
@@ -40,6 +45,7 @@ import { ComponentsModule } from './components/components.module';
     SplashScreen,
     LocalStorageService,
     EventEmitterService,
+    ApiServiceService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -1,3 +1,4 @@
+import { LoginComponent } from './login/login.component';
 import { MoveTodoComponent } from './move-todo/move-todo.component';
 import { DayViewComponent } from '../components/day-view/day-view.component';
 import { WeekViewComponent } from '../components/week-view/week-view.component';
@@ -20,7 +21,8 @@ const coms : any[] = [
   EditScheduleComponent,
   CreateTodoComponent,
   ManageGroupComponent,
-  MoveTodoComponent
+  MoveTodoComponent,
+  LoginComponent
 ];
 
 @NgModule({

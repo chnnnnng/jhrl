@@ -1,0 +1,33 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>登陆</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()"><ion-icon name="close"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <form>
+      <ion-list>
+        <ion-item>
+            <ion-label position="floating">用户名</ion-label>
+            <ion-input required [(ngModel)]="username" name="username"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">密码</ion-label>
+            <ion-input required [(ngModel)]="password" name="password"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            验证码
+          </ion-label>
+          <ion-input required [(ngModel)]="yzm" name="yzm"></ion-input>
+          <ion-label slot="end">
+            <img src="{{yzmurl}}">
+          </ion-label>
+          <ion-button slot="end" size="small" (click)="refreshYzm()" color="dark" style="margin:0px 0px 0px 8px;height:60%"><ion-icon name="refresh"></ion-icon></ion-button>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="block" type="submit" (click)="onFormSubmit()" color="success">登陆<ion-icon name="checkmark"></ion-icon></ion-button>
+  </form>
+</ion-content>

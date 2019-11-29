@@ -68,5 +68,8 @@ export class SettingManager {
     public getDefaultView(){
         return this.setting.defaultView;
     }
+    public getAutoSetting(){
+        return this.setting.autoSetting;
+    }
 
 }
