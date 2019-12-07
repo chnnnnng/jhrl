@@ -34,7 +34,7 @@ export class ScheduleManager {
                 'height':TimeManager.getDeltaMinutesByTime(startDate,endDate) / 2+'px',
                 'top':TimeManager.getDeltaMinutesFromZeroToCertain(startDate) /2 +'px',
             };
-            schedule['simple_time'] = startDate.getHours()+":"+((startDate.getMinutes()<10)?(startDate.getMinutes()+'0'):(startDate.getMinutes()))+"~"+endDate.getHours()+":"+((endDate.getMinutes()<10)?(endDate.getMinutes()+'0'):(endDate.getMinutes()));
+            schedule['simple_time'] = startDate.getHours()+":"+((startDate.getMinutes()<10)?("0"+startDate.getMinutes()):(startDate.getMinutes()))+"~"+endDate.getHours()+":"+((endDate.getMinutes()<10)?("0"+endDate.getMinutes()):(endDate.getMinutes()));
             if(!check){
                 schedules[weeknum][day-1].push(schedule);
                 this.storage.set("schedules",schedules);

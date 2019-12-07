@@ -5,7 +5,8 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ApiServiceService {
-  private url_root = 'http://127.0.0.1:8000/jhrlapis/';
+  //private url_root = 'http://127.0.0.1:8000/jhrlapis/';
+  private url_root = 'http://chng.fun:81/jhrlapis/';
   private url_getStart = this.url_root+"getStart";
   private url_login = this.url_root+"login";
   private url_getYzm = this.url_root+"getYzm";

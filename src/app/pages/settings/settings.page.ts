@@ -98,9 +98,10 @@ export class SettingsPage implements OnInit {
     });
     modal.onDidDismiss()
     .then((data) => {
-      this.setting.rawCourseData = JSON.stringify(data.data['kb']);
-      this.save();
-      //location.reload();
+      if(data != null){
+        this.setting.rawCourseData = JSON.stringify(data.data['kb']);
+        this.save();
+      }
     });
     return await modal.present();
   }

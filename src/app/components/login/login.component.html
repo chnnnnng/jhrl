@@ -15,19 +15,24 @@
         </ion-item>
         <ion-item>
             <ion-label position="floating">密码</ion-label>
-            <ion-input required [(ngModel)]="password" name="password"></ion-input>
+            <ion-input required [(ngModel)]="password" name="password" type="password"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>
-            验证码
-          </ion-label>
+          <ion-label>验证码图片<small>(点击图片可刷新)</small></ion-label>
+          <ion-img [src]="yzmurl" (click)="refreshYzm()"></ion-img>
+        </ion-item>
+        <ion-item>
+          <ion-label>输入验证码</ion-label>
           <ion-input required [(ngModel)]="yzm" name="yzm"></ion-input>
-          <ion-label slot="end">
-            <img src="{{yzmurl}}">
-          </ion-label>
-          <ion-button slot="end" size="small" (click)="refreshYzm()" color="dark" style="margin:0px 0px 0px 8px;height:60%"><ion-icon name="refresh"></ion-icon></ion-button>
         </ion-item>
       </ion-list>
       <ion-button expand="block" type="submit" (click)="onFormSubmit()" color="success">登陆<ion-icon name="checkmark"></ion-icon></ion-button>
   </form>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-item>
+      <ion-textarea readonly="true" rows="2" value="PS:该页面仅用于登陆教务系统，精弘网络不会记录您的登陆信息。"></ion-textarea>
+  </ion-item>
+  </ion-toolbar>
+</ion-footer>

@@ -22,14 +22,13 @@ export class LoginComponent implements OnInit {
       this.apiService.getStart().then((data)=>{      
         this.jsid = data['jsid'];
         this.yzmurl = this.apiService.getYzmUrl(this.jsid);
-        //console.log(data);
       });
     } catch (error) {
       alert("发生未知错误");
     }
   }
 
-  dismissModal(data){
+  dismissModal(data = null){
     this.modalController.dismiss(data);
   }
 
